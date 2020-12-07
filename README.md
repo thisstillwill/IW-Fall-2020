@@ -1,6 +1,6 @@
 # IW Fall 2020
 
-This repository contains the code used for my Fall 2020 independent work.
+This repository my Fall 2020 independent work, which implements the Marching Cubes algorithm and uses it to create random, destructible terrain. 
 
 ## Builds
 

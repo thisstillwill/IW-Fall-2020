@@ -14,7 +14,7 @@ public class GridPoint : MonoBehaviour
     private Vector3 position = Vector3.zero;
     private float value = 0f;
     private float size = 0.1f;
-    private float dPaint = 0.5f;        // Value added/removed
+    private float dPaint = 2f;        // Value added/removed
 
     // Set the GridPoint's position relative to its parent (the grid)
     public Vector3 Position

@@ -374,15 +374,15 @@ public static class MarchingCubes
         // below the isosurface
         //
         // Note: The "|=" operator sets the bit at the index given, 
-        // essentially adding that value to the index 
-        if (cell.p[0].Value < isolevel) index |= 1;
-        if (cell.p[1].Value < isolevel) index |= 2;
-        if (cell.p[2].Value < isolevel) index |= 4;
-        if (cell.p[3].Value < isolevel) index |= 8;
-        if (cell.p[4].Value < isolevel) index |= 16;
-        if (cell.p[5].Value < isolevel) index |= 32;
-        if (cell.p[6].Value < isolevel) index |= 64;
-        if (cell.p[7].Value < isolevel) index |= 128;
+        // essentially adding that value to the index if it not already set
+        if (cell.p[0].Value < isolevel) index |= 1 << 0;
+        if (cell.p[1].Value < isolevel) index |= 1 << 1;
+        if (cell.p[2].Value < isolevel) index |= 1 << 2;
+        if (cell.p[3].Value < isolevel) index |= 1 << 3;
+        if (cell.p[4].Value < isolevel) index |= 1 << 4;
+        if (cell.p[5].Value < isolevel) index |= 1 << 5;
+        if (cell.p[6].Value < isolevel) index |= 1 << 6;
+        if (cell.p[7].Value < isolevel) index |= 1 << 7;
 
         // Return if the GridCell does not intersect the isosurface at all
         if (edgeTable[index] == 0) return;
@@ -436,78 +436,5 @@ public static class MarchingCubes
         // Calculate percentage for interpolation point
         float t = (isolevel - p1.Value) / (p2.Value - p1.Value);
         return p1.Position + t * (p2.Position - p1.Position); // Return edge position
-    }
-
-    // Get a mesh
-    public static Mesh GetMesh(ref GameObject go, ref Material material, bool bCollider)
-    {
-        Mesh m = null;
-
-        MeshRenderer mr = go.GetComponent<MeshRenderer>();
-        if (mr == null)
-        {
-            mr = go.AddComponent<MeshRenderer>();
-        }
-        mr.material = material;
-
-        MeshFilter mf = go.GetComponent<MeshFilter>();
-        if (mf == null)
-        {
-            mf = go.AddComponent<MeshFilter>();
-        }
-
-        if (Application.isEditor == true)
-        {
-            if (mf.sharedMesh == null)
-            {
-                mf.sharedMesh = new Mesh();
-            }
-            m = mf.sharedMesh;
-        }
-        else
-        {
-            if (mf.mesh == null)
-            {
-                mf.mesh = new Mesh();
-            }
-            m = mf.mesh;
-        }
-        m.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32; // 4 billion vertices max
-        m.name = "Procedural Mesh";
-
-        if (bCollider == true)
-        {
-            MeshCollider mc = go.GetComponent<MeshCollider>();
-            if (mc == null)
-            {
-                mc = go.AddComponent<MeshCollider>();
-            }
-            mc.sharedMesh = mf.mesh;
-        }
-
-        return m;
-    }
-
-    // Set a mesh
-    public static Mesh SetMesh(ref GameObject go, ref Vector3[] vertices, ref int[] triangles, ref Vector2[] uv)
-    {
-        Mesh m = go.GetComponent<MeshFilter>().mesh;
-
-        m.Clear();
-
-        m.vertices = vertices;
-        m.triangles = triangles;
-        m.uv = uv;
-
-        m.RecalculateBounds();
-        m.RecalculateNormals();
-
-        MeshCollider mc = go.GetComponent<MeshCollider>();
-        if (mc != null)
-        {
-            mc.sharedMesh = m;
-        }
-
-        return m;
     }
 }

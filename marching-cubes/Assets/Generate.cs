@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using System.Diagnostics;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,7 +31,7 @@ public class Generate : MonoBehaviour
         SampleIsofield();
         ExtractIsosurface();
         DrawGridBounds();
-        Debug.Log("Initial generation complete");
+        UnityEngine.Debug.Log("Initial generation complete");
     }
 
     // Update is called once per frame
@@ -43,15 +43,22 @@ public class Generate : MonoBehaviour
             // Select a random material to use
             m = Materials[Random.Range(0, Materials.Length)];
             SampleIsofield();
+
+            Stopwatch st = new Stopwatch();
+            st.Start();
+
             ExtractIsosurface();
-            Debug.Log("Mesh reset");
+            UnityEngine.Debug.Log("Mesh reset");
+
+            st.Stop();
+            UnityEngine.Debug.Log(string.Format("Time to extract isosurface: {0}", st.ElapsedMilliseconds));
         }
         // Clear the grid
         if (Input.GetKeyDown(KeyCode.C))
         {
             ClearGrid();
             ExtractIsosurface();
-            Debug.Log("Grid cleared");
+            UnityEngine.Debug.Log("Grid cleared");
         }
         // Update mesh if outstanding build request
         if (buildRequest)
@@ -98,7 +105,7 @@ public class Generate : MonoBehaviour
                 }
             }
         }
-        Debug.Log("Terrain generated");
+        UnityEngine.Debug.Log("Terrain generated");
     }
 
     // Clear the grid by setting all GridPoint values to 0
@@ -141,15 +148,15 @@ public class Generate : MonoBehaviour
                 }
             }
         }
-        Debug.Log("Grid initialized");
+        UnityEngine.Debug.Log("Grid initialized");
     }
 
-    // Use the Marching Cubes algorithm to extract the isosurface
+    // Use the marching cubes algorithm to extract the isosurface
     private void ExtractIsosurface()
     {
         // Get the gameobject and mesh
         GameObject o = this.gameObject;
-        MarchingCubes.GetMesh(ref o, ref m, true);
+        GetMesh(ref o, ref m, true);
 
         // Clear lists
         vertices.Clear();
@@ -184,11 +191,84 @@ public class Generate : MonoBehaviour
         Vector2[] uvArray = uv.ToArray();
 
         // Set the grid mesh
-        MarchingCubes.SetMesh(ref o, ref vertexArray, ref triangleArray, ref uvArray);
+        SetMesh(ref o, ref vertexArray, ref triangleArray, ref uvArray);
+    }
+
+    // Get a mesh
+    public static Mesh GetMesh(ref GameObject go, ref Material material, bool bCollider)
+    {
+        Mesh m = null;
+
+        MeshRenderer mr = go.GetComponent<MeshRenderer>();
+        if (mr == null)
+        {
+            mr = go.AddComponent<MeshRenderer>();
+        }
+        mr.material = material;
+
+        MeshFilter mf = go.GetComponent<MeshFilter>();
+        if (mf == null)
+        {
+            mf = go.AddComponent<MeshFilter>();
+        }
+
+        if (Application.isEditor == true)
+        {
+            if (mf.sharedMesh == null)
+            {
+                mf.sharedMesh = new Mesh();
+            }
+            m = mf.sharedMesh;
+        }
+        else
+        {
+            if (mf.mesh == null)
+            {
+                mf.mesh = new Mesh();
+            }
+            m = mf.mesh;
+        }
+        m.indexFormat = UnityEngine.Rendering.IndexFormat.UInt16;
+        m.name = "Procedural Mesh";
+
+        if (bCollider == true)
+        {
+            MeshCollider mc = go.GetComponent<MeshCollider>();
+            if (mc == null)
+            {
+                mc = go.AddComponent<MeshCollider>();
+            }
+            mc.sharedMesh = mf.mesh;
+        }
+
+        return m;
+    }
+
+    // Set a mesh
+    private static Mesh SetMesh(ref GameObject go, ref Vector3[] vertices, ref int[] triangles, ref Vector2[] uv)
+    {
+        Mesh m = go.GetComponent<MeshFilter>().mesh;
+
+        m.Clear();
+
+        m.vertices = vertices;
+        m.triangles = triangles;
+        m.uv = uv;
+
+        m.RecalculateBounds();
+        m.RecalculateNormals();
+
+        MeshCollider mc = go.GetComponent<MeshCollider>();
+        if (mc != null)
+        {
+            mc.sharedMesh = m;
+        }
+
+        return m;
     }
 
     // Map a 2D texture to a 3D surface
-    public static class UV
+    private static class UV
     {
         public static Vector2 A = new Vector2(0, 1);
         public static Vector2 B = new Vector2(1, 1);
@@ -253,6 +333,6 @@ public class Generate : MonoBehaviour
         GridBounds.SetPosition(14, new Vector3(X, 0, Z));
         GridBounds.SetPosition(15, new Vector3(X, 0, 0));
 
-        Debug.Log("Boundaries drawn");
+        UnityEngine.Debug.Log("Boundaries drawn");
     }
 }

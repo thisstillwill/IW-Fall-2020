@@ -63,7 +63,7 @@ public class Triangle
 // The Marching Cubes algorithm and associated helper functions
 public static class MarchingCubes
 {
-    // Tables from http://paulbourke.net/geometry/polygonise/
+    // Table from http://paulbourke.net/geometry/polygonise/
     // 256 edge table
     // Indicates which edges of the GridCell are intersected by the isosurface
     public static int[] edgeTable = {
@@ -99,6 +99,8 @@ public static class MarchingCubes
         0x69c, 0x795, 0x49f, 0x596, 0x29a, 0x393, 0x99 , 0x190,
         0xf00, 0xe09, 0xd03, 0xc0a, 0xb06, 0xa0f, 0x905, 0x80c,
         0x70c, 0x605, 0x50f, 0x406, 0x30a, 0x203, 0x109, 0x0   };
+
+    // Table from http://paulbourke.net/geometry/polygonise/
     // 256 x 16 triangle table
     // Indicates required triangles to represent intersections
     public static int[,] triangleTable = {
@@ -359,6 +361,22 @@ public static class MarchingCubes
         {0, 3, 8, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1},
         {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1}};
 
+    // 12 x 2 vertex table
+    // Indicates which vertices make up the edges of the GridCell
+    public static int[,] vertexTable = {
+        {0, 1},
+        {1, 2},
+        {2, 3},
+        {3, 0},
+        {4, 5},
+        {5, 6},
+        {6, 7},
+        {7, 4},
+        {0, 4},
+        {1, 5},
+        {2, 6},
+        {3, 7}};
+
     // Given a reference to a GridCell and an isolevel, calculate the
     // triangulation representing the intersection of the GridCell and the
     // isosurface
@@ -375,14 +393,13 @@ public static class MarchingCubes
         //
         // Note: The "|=" operator sets the bit at the index given, 
         // essentially adding that value to the index if it not already set
-        if (cell.p[0].Value < isolevel) index |= 1 << 0;
-        if (cell.p[1].Value < isolevel) index |= 1 << 1;
-        if (cell.p[2].Value < isolevel) index |= 1 << 2;
-        if (cell.p[3].Value < isolevel) index |= 1 << 3;
-        if (cell.p[4].Value < isolevel) index |= 1 << 4;
-        if (cell.p[5].Value < isolevel) index |= 1 << 5;
-        if (cell.p[6].Value < isolevel) index |= 1 << 6;
-        if (cell.p[7].Value < isolevel) index |= 1 << 7;
+        for (int i = 0; i < 8; i++)
+        {
+            if (cell.p[i].Value < isolevel)
+            {
+                index |= 1 << i;
+            }
+        }
 
         // Return if the GridCell does not intersect the isosurface at all
         if (edgeTable[index] == 0) return;
@@ -391,30 +408,13 @@ public static class MarchingCubes
         //
         // Note: The expression "edgeTable[index] & (1 << position)) != 0"
         // returns true if the bit at the given position is set
-        if ((edgeTable[index] & (1 << 0)) != 0)
-            cell.edgepoints[0] = Interpolate(cell.p[0], cell.p[1], isolevel);
-        if ((edgeTable[index] & (1 << 1)) != 0)
-            cell.edgepoints[1] = Interpolate(cell.p[1], cell.p[2], isolevel);
-        if ((edgeTable[index] & (1 << 2)) != 0)
-            cell.edgepoints[2] = Interpolate(cell.p[2], cell.p[3], isolevel);
-        if ((edgeTable[index] & (1 << 3)) != 0)
-            cell.edgepoints[3] = Interpolate(cell.p[3], cell.p[0], isolevel);
-        if ((edgeTable[index] & (1 << 4)) != 0)
-            cell.edgepoints[4] = Interpolate(cell.p[4], cell.p[5], isolevel);
-        if ((edgeTable[index] & (1 << 5)) != 0)
-            cell.edgepoints[5] = Interpolate(cell.p[5], cell.p[6], isolevel);
-        if ((edgeTable[index] & (1 << 6)) != 0)
-            cell.edgepoints[6] = Interpolate(cell.p[6], cell.p[7], isolevel);
-        if ((edgeTable[index] & (1 << 7)) != 0)
-            cell.edgepoints[7] = Interpolate(cell.p[7], cell.p[4], isolevel);
-        if ((edgeTable[index] & (1 << 8)) != 0)
-            cell.edgepoints[8] = Interpolate(cell.p[0], cell.p[4], isolevel);
-        if ((edgeTable[index] & (1 << 9)) != 0)
-            cell.edgepoints[9] = Interpolate(cell.p[1], cell.p[5], isolevel);
-        if ((edgeTable[index] & (1 << 10)) != 0)
-            cell.edgepoints[10] = Interpolate(cell.p[2], cell.p[6], isolevel);
-        if ((edgeTable[index] & (1 << 11)) != 0)
-            cell.edgepoints[11] = Interpolate(cell.p[3], cell.p[7], isolevel);
+        for (int i = 0; i < 12; i++)
+        {
+            if ((edgeTable[index] & (1 << i)) != 0)
+            {
+                cell.edgepoints[i] = Interpolate(cell.p[vertexTable[i, 0]], cell.p[vertexTable[i, 1]], isolevel);
+            }
+        }
 
         // Determine triangles for GridCell configuration
         for (int i = 0; triangleTable[index, i] != -1; i += 3)

@@ -1,5 +1,7 @@
 # IW Fall 2020
 
+![screenshot](screenshot.png)
+
 This repository contains my Fall 2020 independent work, which implements the Marching Cubes algorithm to create random, destructible terrain. 
 
 ## Builds

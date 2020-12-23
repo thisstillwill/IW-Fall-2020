@@ -2,7 +2,7 @@
 
 ![screenshot](screenshot.png)
 
-This repository contains the code for my Fall 2020 independent work, which implements the marching cubes algorithm to create random, destructible terrain. 
+This repository contains the code for my Fall 2020 independent work, which implements the marching cubes algorithm to create random, deformable terrain. 
 
 ## Builds
 

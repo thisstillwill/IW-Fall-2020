@@ -2,7 +2,7 @@
 
 // Script by IJM: http://answers.unity3d.com/questions/29741/mouse-look-script.html
 // Changed to fit standard C# conventions
-// Extended by William Svoboda 12-06-20: https://github.com/disstillwill/IW-Fall-2020/blob/master/marching-cubes/Assets/FlyCamera.cs
+// Extended by William Svoboda 12-06-20: https://github.com/disstillwill/IW-Fall-2020/blob/master/marching-cubes/Assets/Scripts/FlyCamera.cs
 // - Added movement code
 // - Added brush mechanics for Marching Cubes demo
 // Basic flying camera controller that mimics Minecraft's flying controls.

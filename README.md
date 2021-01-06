@@ -2,7 +2,17 @@
 
 ![screenshot](screenshot.png)
 
-This repository contains the code for my Fall 2020 independent work, which implements the marching cubes algorithm to create random, deformable terrain. 
+This repository contains the code for my Fall 2020 independent work, which implements the marching cubes algorithm in the Unity game engine to create random, deformable terrain. 
+
+## Contents
+
+* `marching-cubes` - Directory containing all Unity project assets
+* `IWreport` - Directory containing files for the final written report (requires Pygments to be installed)
+
+## Usage
+
+* To build the demo yourself, open `marching-cubes` in Unity
+* To compile the report, use the included makefile in `IWreport`
 
 ## Builds
 

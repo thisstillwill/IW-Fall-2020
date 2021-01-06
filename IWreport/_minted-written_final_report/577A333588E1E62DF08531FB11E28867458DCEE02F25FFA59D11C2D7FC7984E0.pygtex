@@ -1,0 +1,7 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{public} \PYG{k}{static} \PYG{n}{Vector3} \PYG{n+nf}{Interpolate}\PYG{p}{(}\PYG{n}{GridPoint} \PYG{n}{p1}\PYG{p}{,} \PYG{n}{GridPoint} \PYG{n}{p2}\PYG{p}{,} \PYG{k+kt}{float} \PYG{n}{isolevel}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k+kt}{float} \PYG{n}{t} \PYG{p}{=} \PYG{p}{(}\PYG{n}{isolevel} \PYG{p}{\PYGZhy{}} \PYG{n}{p1}\PYG{p}{.}\PYG{n}{Value}\PYG{p}{)} \PYG{p}{/} \PYG{p}{(}\PYG{n}{p2}\PYG{p}{.}\PYG{n}{Value} \PYG{p}{\PYGZhy{}} \PYG{n}{p1}\PYG{p}{.}\PYG{n}{Value}\PYG{p}{);}
+    \PYG{k}{return} \PYG{n}{p1}\PYG{p}{.}\PYG{n}{Position} \PYG{p}{+} \PYG{n}{t} \PYG{p}{*} \PYG{p}{(}\PYG{n}{p2}\PYG{p}{.}\PYG{n}{Position} \PYG{p}{\PYGZhy{}} \PYG{n}{p1}\PYG{p}{.}\PYG{n}{Position}\PYG{p}{);}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

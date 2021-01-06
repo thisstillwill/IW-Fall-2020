@@ -1,0 +1,9 @@
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`\$=3\catcode`\^=7\catcode`\_=8}]
+\PYG{k+kt}{ring} \PYG{n}{title} \PYG{p}{=} \PYG{l+s}{\PYGZdq{}This is a Unicode π in the sky\PYGZdq{}}
+
+\PYG{c+cm}{fined as $\pi=\lim_{n\to\infty}\frac{P_n}{d}$ where $P$ is the perimeter}
+\PYG{c+cm}{ an $n$\PYGZhy{}sided regular polygon circumscribing a}
+\PYG{c+cm}{rcle of diameter $d$.}
+
+\PYG{k}{nst} \PYG{k+kt}{double} \PYG{n}{pi} \PYG{p}{=} \PYG{l+m}{3.1415926535}
+\end{Verbatim}

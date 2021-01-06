@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int} \PYG{n}{numTriangles} \PYG{p}{=} \PYG{l+m}{0}\PYG{p}{;}
+\PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{p}{=} \PYG{l+m}{0}\PYG{p}{;} \PYG{n}{triangleTable}\PYG{p}{[}\PYG{n}{index}\PYG{p}{,} \PYG{n}{i}\PYG{p}{]} \PYG{p}{!=} \PYG{p}{\PYGZhy{}}\PYG{l+m}{1}\PYG{p}{;} \PYG{n}{i} \PYG{p}{+=} \PYG{l+m}{3}\PYG{p}{)}
+\PYG{p}{\PYGZob{}}
+    \PYG{n}{cell}\PYG{p}{.}\PYG{n}{triangles}\PYG{p}{[}\PYG{n}{numTriangles}\PYG{p}{].}\PYG{n}{p}\PYG{p}{[}\PYG{l+m}{0}\PYG{p}{]}
+        \PYG{p}{=} \PYG{n}{cell}\PYG{p}{.}\PYG{n}{edgepoints}\PYG{p}{[}\PYG{n}{triangleTable}\PYG{p}{[}\PYG{n}{index}\PYG{p}{,} \PYG{n}{i}\PYG{p}{]];}
+    \PYG{n}{cell}\PYG{p}{.}\PYG{n}{triangles}\PYG{p}{[}\PYG{n}{numTriangles}\PYG{p}{].}\PYG{n}{p}\PYG{p}{[}\PYG{l+m}{1}\PYG{p}{]}
+        \PYG{p}{=} \PYG{n}{cell}\PYG{p}{.}\PYG{n}{edgepoints}\PYG{p}{[}\PYG{n}{triangleTable}\PYG{p}{[}\PYG{n}{index}\PYG{p}{,} \PYG{n}{i} \PYG{p}{+} \PYG{l+m}{1}\PYG{p}{]];}
+    \PYG{n}{cell}\PYG{p}{.}\PYG{n}{triangles}\PYG{p}{[}\PYG{n}{numTriangles}\PYG{p}{].}\PYG{n}{p}\PYG{p}{[}\PYG{l+m}{2}\PYG{p}{]}
+        \PYG{p}{=} \PYG{n}{cell}\PYG{p}{.}\PYG{n}{edgepoints}\PYG{p}{[}\PYG{n}{triangleTable}\PYG{p}{[}\PYG{n}{index}\PYG{p}{,} \PYG{n}{i} \PYG{p}{+} \PYG{l+m}{2}\PYG{p}{]];}
+    \PYG{n}{numTriangles}\PYG{p}{++;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

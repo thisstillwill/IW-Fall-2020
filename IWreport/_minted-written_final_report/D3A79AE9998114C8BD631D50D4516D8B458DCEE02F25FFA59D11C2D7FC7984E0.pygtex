@@ -1,0 +1,13 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{if} \PYG{p}{(}\PYG{n}{edgeTable}\PYG{p}{[}\PYG{n}{index}\PYG{p}{]} \PYG{p}{==} \PYG{l+m}{0}\PYG{p}{)} \PYG{k}{return}\PYG{p}{;}
+\PYG{k}{for} \PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{p}{=} \PYG{l+m}{0}\PYG{p}{;} \PYG{n}{i} \PYG{p}{\PYGZlt{}} \PYG{l+m}{12}\PYG{p}{;} \PYG{n}{i}\PYG{p}{++)}
+\PYG{p}{\PYGZob{}}
+    \PYG{k}{if} \PYG{p}{((}\PYG{n}{edgeTable}\PYG{p}{[}\PYG{n}{index}\PYG{p}{]} \PYG{p}{\PYGZam{}} \PYG{p}{(}\PYG{l+m}{1} \PYG{p}{\PYGZlt{}\PYGZlt{}} \PYG{n}{i}\PYG{p}{))} \PYG{p}{!=} \PYG{l+m}{0}\PYG{p}{)}
+    \PYG{p}{\PYGZob{}}
+        \PYG{n}{cell}\PYG{p}{.}\PYG{n}{edgepoints}\PYG{p}{[}\PYG{n}{i}\PYG{p}{]} \PYG{p}{=}
+        \PYG{n}{Interpolate}\PYG{p}{(}\PYG{n}{cell}\PYG{p}{.}\PYG{n}{p}\PYG{p}{[}\PYG{n}{vertexTable}\PYG{p}{[}\PYG{n}{i}\PYG{p}{,} \PYG{l+m}{0}\PYG{p}{]],}
+                          \PYG{n}{cell}\PYG{p}{.}\PYG{n}{p}\PYG{p}{[}\PYG{n}{vertexTable}\PYG{p}{[}\PYG{n}{i}\PYG{p}{,} \PYG{l+m}{1}\PYG{p}{]],}
+                          \PYG{n}{isolevel}\PYG{p}{);}
+    \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

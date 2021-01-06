@@ -1,0 +1,5 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{float} \PYG{n}{nx} \PYG{p}{=} \PYG{n}{Zoom} \PYG{p}{*} \PYG{p}{(}\PYG{n}{x} \PYG{p}{/} \PYG{n}{GridSize}\PYG{p}{.}\PYG{n}{x}\PYG{p}{);}
+\PYG{k+kt}{float} \PYG{n}{ny} \PYG{p}{=} \PYG{n}{Zoom} \PYG{p}{*} \PYG{p}{(}\PYG{n}{y} \PYG{p}{/} \PYG{n}{GridSize}\PYG{p}{.}\PYG{n}{y}\PYG{p}{);}
+\PYG{k+kt}{float} \PYG{n}{nz} \PYG{p}{=} \PYG{n}{Zoom} \PYG{p}{*} \PYG{p}{(}\PYG{n}{z} \PYG{p}{/} \PYG{n}{GridSize}\PYG{p}{.}\PYG{n}{z}\PYG{p}{);}
+\end{Verbatim}

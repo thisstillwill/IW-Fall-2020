@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{grid}\PYG{p}{[}\PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{,} \PYG{n}{z}\PYG{p}{].}\PYG{n}{Value} \PYG{p}{=} \PYG{n}{Mathf}\PYG{p}{.}\PYG{n}{PerlinNoise}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{z}\PYG{p}{)} \PYG{p}{*} \PYG{n}{y}\PYG{p}{;}
+\end{Verbatim}

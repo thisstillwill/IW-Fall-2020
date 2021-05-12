@@ -6,13 +6,13 @@ This repository contains the code for my Fall 2020 independent work, which imple
 
 ## Contents
 
-* `marching-cubes` - Directory containing all Unity project assets
-* `IWreport` - Directory containing files for the final written report (requires Pygments to be installed)
+* `marching-cubes/` - Directory containing all Unity project assets
+* `IWreport/` - Directory containing files for the final written report (requires Pygments to be installed)
 
 ## Usage
 
-* To build the demo yourself, open `marching-cubes` in Unity
-* To compile the report, use the included makefile in `IWreport`
+* To build the demo yourself, open `marching-cubes/` in Unity
+* To read the report, use the included makefile in `IWreport/` or download it [here](https://github.com/disstillwill/IW-Fall-2020/blob/master/IWreport/written_final_report.pdf)
 
 ## Builds
 

@@ -12,7 +12,7 @@ This repository contains the code for my Fall 2020 independent work, which imple
 ## Usage
 
 * To build the demo yourself, open `marching-cubes/` in Unity
-* To read the report, use the included makefile in `IWreport/` or download it [here](https://github.com/disstillwill/IW-Fall-2020/blob/master/IWreport/written_final_report.pdf)
+* To read the report, use the included makefile in `IWreport/` or download it [here](https://github.com/thisstillwill/IW-Fall-2020/blob/master/IWreport/written_final_report.pdf)
 
 ## Builds
 
